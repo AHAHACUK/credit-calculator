@@ -1,0 +1,16 @@
+{
+    "appTitle": "Банк Штука",
+    "creditSum": "Сумма кредита",
+    "creditTime": "Срок кредита",
+    "creditPercentage": "Процент кредита",
+    "validationErrorFormat": "Неверный формат",
+    "validationErrorZero": "Значение не может быть равным нулю",
+    "validationErrorEmpty": "Поле не может быть пустым",
+    "credit": "Кредит",
+    "overpayment": "Переплата",
+    "monthyPayment": "Ежемесячный платеж",
+    "creditOverpayment": "Переплата по кредиту",
+    "totalPayment": "Общая выплата",
+    "annuityCreditCalculation": "Аннуитетные\nплатежи",
+    "differentiatedCreditCalculation": "Дифференцированные\nплатежи"
+}
