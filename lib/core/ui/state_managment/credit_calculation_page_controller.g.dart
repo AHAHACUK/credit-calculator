@@ -17,32 +17,29 @@ mixin _$CreditCalculationPageController
           Computed<bool>(() => super.canCalculateCredit,
               name: '_CreditCalculationControllerBase.canCalculateCredit'))
       .value;
-  Computed<CreditCalculationRepository>? _$calculationRepositoryComputed;
+  Computed<CreditCalculationCalcualtor>? _$currentCalculatorComputed;
 
   @override
-  CreditCalculationRepository get calculationRepository =>
-      (_$calculationRepositoryComputed ??=
-              Computed<CreditCalculationRepository>(
-                  () => super.calculationRepository,
-                  name:
-                      '_CreditCalculationControllerBase.calculationRepository'))
+  CreditCalculationCalcualtor get currentCalculator =>
+      (_$currentCalculatorComputed ??= Computed<CreditCalculationCalcualtor>(
+              () => super.currentCalculator,
+              name: '_CreditCalculationControllerBase.currentCalculator'))
           .value;
 
-  late final _$calculationMethodSwitchAtom = Atom(
-      name: '_CreditCalculationControllerBase.calculationMethodSwitch',
+  late final _$calculationMethodAtom = Atom(
+      name: '_CreditCalculationControllerBase.calculationMethod',
       context: context);
 
   @override
-  bool get calculationMethodSwitch {
-    _$calculationMethodSwitchAtom.reportRead();
-    return super.calculationMethodSwitch;
+  CredicCalculationMethod get calculationMethod {
+    _$calculationMethodAtom.reportRead();
+    return super.calculationMethod;
   }
 
   @override
-  set calculationMethodSwitch(bool value) {
-    _$calculationMethodSwitchAtom
-        .reportWrite(value, super.calculationMethodSwitch, () {
-      super.calculationMethodSwitch = value;
+  set calculationMethod(CredicCalculationMethod value) {
+    _$calculationMethodAtom.reportWrite(value, super.calculationMethod, () {
+      super.calculationMethod = value;
     });
   }
 
@@ -80,91 +77,146 @@ mixin _$CreditCalculationPageController
     });
   }
 
-  late final _$yearsAmountControllerAtom = Atom(
-      name: '_CreditCalculationControllerBase.yearsAmountController',
+  late final _$monthsAmountControllerAtom = Atom(
+      name: '_CreditCalculationControllerBase.monthsAmountController',
       context: context);
 
   @override
-  TextEditingController get yearsAmountController {
-    _$yearsAmountControllerAtom.reportRead();
-    return super.yearsAmountController;
+  TextEditingController get monthsAmountController {
+    _$monthsAmountControllerAtom.reportRead();
+    return super.monthsAmountController;
   }
 
   @override
-  set yearsAmountController(TextEditingController value) {
-    _$yearsAmountControllerAtom.reportWrite(value, super.yearsAmountController,
-        () {
-      super.yearsAmountController = value;
+  set monthsAmountController(TextEditingController value) {
+    _$monthsAmountControllerAtom
+        .reportWrite(value, super.monthsAmountController, () {
+      super.monthsAmountController = value;
     });
   }
 
-  late final _$yearsAmountErrorAtom = Atom(
-      name: '_CreditCalculationControllerBase.yearsAmountError',
+  late final _$monthsAmountErrorAtom = Atom(
+      name: '_CreditCalculationControllerBase.monthsAmountError',
       context: context);
 
   @override
-  ValidationError? get yearsAmountError {
-    _$yearsAmountErrorAtom.reportRead();
-    return super.yearsAmountError;
+  ValidationError? get monthsAmountError {
+    _$monthsAmountErrorAtom.reportRead();
+    return super.monthsAmountError;
   }
 
   @override
-  set yearsAmountError(ValidationError? value) {
-    _$yearsAmountErrorAtom.reportWrite(value, super.yearsAmountError, () {
-      super.yearsAmountError = value;
+  set monthsAmountError(ValidationError? value) {
+    _$monthsAmountErrorAtom.reportWrite(value, super.monthsAmountError, () {
+      super.monthsAmountError = value;
     });
   }
 
-  late final _$yearsPercentControllerAtom = Atom(
-      name: '_CreditCalculationControllerBase.yearsPercentController',
+  late final _$monthsPercentControllerAtom = Atom(
+      name: '_CreditCalculationControllerBase.monthsPercentController',
       context: context);
 
   @override
-  TextEditingController get yearsPercentController {
-    _$yearsPercentControllerAtom.reportRead();
-    return super.yearsPercentController;
+  TextEditingController get monthsPercentController {
+    _$monthsPercentControllerAtom.reportRead();
+    return super.monthsPercentController;
   }
 
   @override
-  set yearsPercentController(TextEditingController value) {
-    _$yearsPercentControllerAtom
-        .reportWrite(value, super.yearsPercentController, () {
-      super.yearsPercentController = value;
+  set monthsPercentController(TextEditingController value) {
+    _$monthsPercentControllerAtom
+        .reportWrite(value, super.monthsPercentController, () {
+      super.monthsPercentController = value;
     });
   }
 
-  late final _$yearsPercentErrorAtom = Atom(
-      name: '_CreditCalculationControllerBase.yearsPercentError',
+  late final _$monthsPercentErrorAtom = Atom(
+      name: '_CreditCalculationControllerBase.monthsPercentError',
       context: context);
 
   @override
-  ValidationError? get yearsPercentError {
-    _$yearsPercentErrorAtom.reportRead();
-    return super.yearsPercentError;
+  ValidationError? get monthsPercentError {
+    _$monthsPercentErrorAtom.reportRead();
+    return super.monthsPercentError;
   }
 
   @override
-  set yearsPercentError(ValidationError? value) {
-    _$yearsPercentErrorAtom.reportWrite(value, super.yearsPercentError, () {
-      super.yearsPercentError = value;
+  set monthsPercentError(ValidationError? value) {
+    _$monthsPercentErrorAtom.reportWrite(value, super.monthsPercentError, () {
+      super.monthsPercentError = value;
     });
   }
 
-  late final _$creditCalculationAtom = Atom(
-      name: '_CreditCalculationControllerBase.creditCalculation',
+  late final _$creditCalculationInputAtom = Atom(
+      name: '_CreditCalculationControllerBase.creditCalculationInput',
       context: context);
 
   @override
-  CreditCalculation? get creditCalculation {
-    _$creditCalculationAtom.reportRead();
-    return super.creditCalculation;
+  CreditCalculationInput? get creditCalculationInput {
+    _$creditCalculationInputAtom.reportRead();
+    return super.creditCalculationInput;
   }
 
   @override
-  set creditCalculation(CreditCalculation? value) {
-    _$creditCalculationAtom.reportWrite(value, super.creditCalculation, () {
-      super.creditCalculation = value;
+  set creditCalculationInput(CreditCalculationInput? value) {
+    _$creditCalculationInputAtom
+        .reportWrite(value, super.creditCalculationInput, () {
+      super.creditCalculationInput = value;
     });
+  }
+
+  late final _$creditCalculationResultAtom = Atom(
+      name: '_CreditCalculationControllerBase.creditCalculationResult',
+      context: context);
+
+  @override
+  CreditCalculationResult? get creditCalculationResult {
+    _$creditCalculationResultAtom.reportRead();
+    return super.creditCalculationResult;
+  }
+
+  @override
+  set creditCalculationResult(CreditCalculationResult? value) {
+    _$creditCalculationResultAtom
+        .reportWrite(value, super.creditCalculationResult, () {
+      super.creditCalculationResult = value;
+    });
+  }
+
+  late final _$isSavingAtom =
+      Atom(name: '_CreditCalculationControllerBase.isSaving', context: context);
+
+  @override
+  bool get isSaving {
+    _$isSavingAtom.reportRead();
+    return super.isSaving;
+  }
+
+  @override
+  set isSaving(bool value) {
+    _$isSavingAtom.reportWrite(value, super.isSaving, () {
+      super.isSaving = value;
+    });
+  }
+
+  late final _$saveCreditCalculationsAsyncAction = AsyncAction(
+      '_CreditCalculationControllerBase.saveCreditCalculations',
+      context: context);
+
+  @override
+  Future<void> saveCreditCalculations() {
+    return _$saveCreditCalculationsAsyncAction
+        .run(() => super.saveCreditCalculations());
+  }
+
+  late final _$setCreditCalculationsAsyncAction = AsyncAction(
+      '_CreditCalculationControllerBase.setCreditCalculations',
+      context: context);
+
+  @override
+  Future<dynamic> setCreditCalculations(CreditCalculation credicCalculation) {
+    return _$setCreditCalculationsAsyncAction
+        .run(() => super.setCreditCalculations(credicCalculation));
   }
 
   late final _$_CreditCalculationControllerBaseActionController =
@@ -185,12 +237,12 @@ mixin _$CreditCalculationPageController
   }
 
   @override
-  void onYearAmountChange(String yearsAmountString) {
+  void onMonthAmountChange(String monthsAmountString) {
     final _$actionInfo =
         _$_CreditCalculationControllerBaseActionController.startAction(
-            name: '_CreditCalculationControllerBase.onYearAmountChange');
+            name: '_CreditCalculationControllerBase.onMonthAmountChange');
     try {
-      return super.onYearAmountChange(yearsAmountString);
+      return super.onMonthAmountChange(monthsAmountString);
     } finally {
       _$_CreditCalculationControllerBaseActionController
           .endAction(_$actionInfo);
@@ -198,12 +250,12 @@ mixin _$CreditCalculationPageController
   }
 
   @override
-  void onYearsPercentChange(String yearsCoefficientString) {
+  void onMonthsPercentChange(String monthsCoefficientString) {
     final _$actionInfo =
         _$_CreditCalculationControllerBaseActionController.startAction(
-            name: '_CreditCalculationControllerBase.onYearsPercentChange');
+            name: '_CreditCalculationControllerBase.onMonthsPercentChange');
     try {
-      return super.onYearsPercentChange(yearsCoefficientString);
+      return super.onMonthsPercentChange(monthsCoefficientString);
     } finally {
       _$_CreditCalculationControllerBaseActionController
           .endAction(_$actionInfo);
@@ -238,16 +290,18 @@ mixin _$CreditCalculationPageController
   @override
   String toString() {
     return '''
-calculationMethodSwitch: ${calculationMethodSwitch},
+calculationMethod: ${calculationMethod},
 creditSumController: ${creditSumController},
 creditSumError: ${creditSumError},
-yearsAmountController: ${yearsAmountController},
-yearsAmountError: ${yearsAmountError},
-yearsPercentController: ${yearsPercentController},
-yearsPercentError: ${yearsPercentError},
-creditCalculation: ${creditCalculation},
+monthsAmountController: ${monthsAmountController},
+monthsAmountError: ${monthsAmountError},
+monthsPercentController: ${monthsPercentController},
+monthsPercentError: ${monthsPercentError},
+creditCalculationInput: ${creditCalculationInput},
+creditCalculationResult: ${creditCalculationResult},
+isSaving: ${isSaving},
 canCalculateCredit: ${canCalculateCredit},
-calculationRepository: ${calculationRepository}
+currentCalculator: ${currentCalculator}
     ''';
   }
 }

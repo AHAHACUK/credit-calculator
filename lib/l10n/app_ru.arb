@@ -12,5 +12,9 @@
     "creditOverpayment": "Переплата по кредиту",
     "totalPayment": "Общая выплата",
     "annuityCreditCalculation": "Аннуитетные\nплатежи",
-    "differentiatedCreditCalculation": "Дифференцированные\nплатежи"
+    "differentiatedCreditCalculation": "Дифференцированные\nплатежи",
+    "saveCalculation": "Сохранить расчет",
+    "loadCalculation": "Загрузить расчет",
+    "fetchError": "Не удалось загрузить данные",
+    "fetchEmptyError": "Данных нет"
 }

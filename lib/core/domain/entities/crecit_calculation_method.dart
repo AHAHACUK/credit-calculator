@@ -1,0 +1,4 @@
+enum CredicCalculationMethod {
+  annuity,
+  differentiated,
+}

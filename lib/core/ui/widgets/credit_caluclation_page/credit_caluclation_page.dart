@@ -1,5 +1,9 @@
 import 'package:bank_thing/app_localizations.dart';
+import 'package:bank_thing/core/domain/entities/crecit_calculation_method.dart';
+import 'package:bank_thing/core/domain/repositories/credit_calculation_repository.dart';
+import 'package:bank_thing/core/ui/bottom_sheets/credit_calculation_choose/credit_calculation_choose_bottom_sheet.dart';
 import 'package:bank_thing/core/ui/mappers/validation_error_string_mapper.dart';
+import 'package:bank_thing/core/ui/presets/core_button_presets.dart';
 import 'package:bank_thing/core/ui/state_managment/credit_calculation_page_controller.dart';
 import 'package:bank_thing/core/ui/values/core_colors.dart';
 import 'package:bank_thing/core/ui/values/core_text_styles.dart';
@@ -12,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 
 class CreditCalculationPage extends HookWidget {
@@ -19,11 +24,15 @@ class CreditCalculationPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final repository = useMemoized(
+      () => GetIt.I<CreditCalculationRepository>(),
+    );
     final pageController = useMemoized(
       () => CreditCalculationPageController(
         initialCreditSum: 10000,
-        initialYearsAmount: 10,
-        initialYearsPercent: 10,
+        initialMonthAmount: 10,
+        initialMonthsPercent: 10,
+        repository: repository,
       ),
     );
     final validationErrorMapper = useMemoized(
@@ -61,9 +70,11 @@ class CreditCalculationPage extends HookWidget {
               ),
               Observer(builder: (_) {
                 return RatioBar(
-                  leftValue: pageController.creditCalculation?.creditSum ?? 1,
+                  leftValue:
+                      pageController.creditCalculationResult?.creditSum ?? 1,
                   rightValue:
-                      pageController.creditCalculation?.overpaymentSum ?? 1,
+                      pageController.creditCalculationResult?.overpaymentSum ??
+                          1,
                   leftColor: CoreColors.ratioBarCreditColor,
                   rightColor: CoreColors.ratioBarOverpaymentColor,
                   height: 16,
@@ -72,7 +83,7 @@ class CreditCalculationPage extends HookWidget {
               const SizedBox(
                 height: 16,
               ),
-              if (pageController.creditCalculation == null)
+              if (pageController.creditCalculationResult == null)
                 Center(
                   child: CircularProgressIndicator(),
                 )
@@ -83,25 +94,27 @@ class CreditCalculationPage extends HookWidget {
                       CreditCalculationResultLine(
                         label: AppLocalizations.of(context).creditSum,
                         value: numbersFormatter.format(
-                          pageController.creditCalculation!.creditSum,
+                          pageController.creditCalculationResult!.creditSum,
                         ),
                       ),
                       CreditCalculationResultLine(
                         label: AppLocalizations.of(context).monthyPayment,
                         value: numbersFormatter.format(
-                          pageController.creditCalculation!.monthyPaymentSum,
+                          pageController
+                              .creditCalculationResult!.monthyPaymentSum,
                         ),
                       ),
                       CreditCalculationResultLine(
                         label: AppLocalizations.of(context).creditOverpayment,
                         value: numbersFormatter.format(
-                          pageController.creditCalculation!.overpaymentSum,
+                          pageController
+                              .creditCalculationResult!.overpaymentSum,
                         ),
                       ),
                       CreditCalculationResultLine(
                         label: AppLocalizations.of(context).totalPayment,
                         value: numbersFormatter.format(
-                          pageController.creditCalculation!.totalSum,
+                          pageController.creditCalculationResult!.totalSum,
                         ),
                       ),
                     ],
@@ -127,7 +140,8 @@ class CreditCalculationPage extends HookWidget {
                   Observer(builder: (_) {
                     return Switcher(
                       width: 96,
-                      enabled: pageController.calculationMethodSwitch,
+                      enabled: pageController.calculationMethod ==
+                          CredicCalculationMethod.annuity,
                       enabledColor:
                           CoreColors.creditCalulationMethodSwitcherBackground,
                       disabledColor:
@@ -169,19 +183,56 @@ class CreditCalculationPage extends HookWidget {
               Observer(builder: (_) {
                 return CreditCalculationPageField(
                   header: AppLocalizations.of(context).creditTime,
-                  controller: pageController.yearsAmountController,
+                  controller: pageController.monthsAmountController,
                   keyboardType: TextInputType.number,
                   error: validationErrorMapper
-                      .call(pageController.yearsAmountError),
+                      .call(pageController.monthsAmountError),
                 );
               }),
               Observer(builder: (_) {
                 return CreditCalculationPageField(
                   header: AppLocalizations.of(context).creditPercentage,
-                  controller: pageController.yearsPercentController,
+                  controller: pageController.monthsPercentController,
                   keyboardType: TextInputType.number,
                   error: validationErrorMapper
-                      .call(pageController.yearsPercentError),
+                      .call(pageController.monthsPercentError),
+                );
+              }),
+              const SizedBox(
+                height: 16,
+              ),
+              Observer(builder: (context) {
+                return Center(
+                  child: CoreButtonPresets.button(
+                    height: 42,
+                    text: AppLocalizations.of(context).saveCalculation,
+                    width: 200,
+                    loading: pageController.isSaving,
+                    active: pageController.creditCalculationResult != null &&
+                        pageController.canCalculateCredit,
+                    onTap: () async {
+                      pageController.saveCreditCalculations();
+                    },
+                  ),
+                );
+              }),
+              const SizedBox(
+                height: 16,
+              ),
+              Observer(builder: (context) {
+                return Center(
+                  child: CoreButtonPresets.button(
+                    height: 42,
+                    text: AppLocalizations.of(context).loadCalculation,
+                    width: 200,
+                    active: pageController.creditCalculationResult != null,
+                    onTap: () async {
+                      final creditCalculation =
+                          await showCreditCalculationChooseBottomSheet(context);
+                      if (creditCalculation == null) return;
+                      pageController.setCreditCalculations(creditCalculation);
+                    },
+                  ),
                 );
               }),
             ],
