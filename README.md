@@ -1,5 +1,5 @@
 # Credit Calculator
-![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/9aa7ccb8-361e-4eb1-b657-a6e8684e2d60)
+![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/e04ab984-3a5f-43c0-bfd3-fdb6cc612c86)
 ![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/5a195fa9-20ee-443e-b9b0-15e2b924b222)
 
 ### Архитектура
