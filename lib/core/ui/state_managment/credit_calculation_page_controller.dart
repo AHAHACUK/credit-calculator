@@ -133,6 +133,10 @@ abstract class _CreditCalculationControllerBase with Store {
       creditSumError = ValidationError.format;
       return;
     }
+    if (creditSum == 0) {
+      creditSumError = ValidationError.zero;
+      return;
+    }
     creditSumError = null;
     _calculate();
   }

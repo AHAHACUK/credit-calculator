@@ -185,6 +185,9 @@ class CreditCalculationPage extends HookWidget {
                   header: AppLocalizations.of(context).creditTime,
                   controller: pageController.monthsAmountController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
+                  ],
                   error: validationErrorMapper
                       .call(pageController.monthsAmountError),
                 );
@@ -194,6 +197,9 @@ class CreditCalculationPage extends HookWidget {
                   header: AppLocalizations.of(context).creditPercentage,
                   controller: pageController.monthsPercentController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
+                  ],
                   error: validationErrorMapper
                       .call(pageController.monthsPercentError),
                 );
