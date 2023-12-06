@@ -1,10 +1,10 @@
 import 'package:bank_thing/app_localizations.dart';
 import 'package:bank_thing/core/domain/entities/crecit_calculation_method.dart';
-import 'package:bank_thing/core/domain/repositories/credit_calculation_repository.dart';
+import 'package:bank_thing/core/domain/repositories/credit_calculation/credit_calculation_repository.dart';
 import 'package:bank_thing/core/ui/bottom_sheets/credit_calculation_choose/credit_calculation_choose_bottom_sheet.dart';
 import 'package:bank_thing/core/ui/mappers/validation_error_string_mapper.dart';
 import 'package:bank_thing/core/ui/presets/core_button_presets.dart';
-import 'package:bank_thing/core/ui/state_managment/credit_calculation_page_controller.dart';
+import 'package:bank_thing/core/ui/state_managment/credit_calculation_page/credit_calculation_page_controller.dart';
 import 'package:bank_thing/core/ui/values/core_colors.dart';
 import 'package:bank_thing/core/ui/values/core_text_styles.dart';
 import 'package:bank_thing/core/ui/widgets/credit_caluclation_page/credit_calculation_result_line.dart';

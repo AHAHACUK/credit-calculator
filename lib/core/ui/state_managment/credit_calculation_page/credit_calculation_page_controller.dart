@@ -4,7 +4,8 @@ import 'package:bank_thing/core/domain/entities/crecit_calculation_method.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation_input.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation_result.dart';
-import 'package:bank_thing/core/domain/repositories/credit_calculation_repository.dart';
+import 'package:bank_thing/core/domain/repositories/credit_calculation/credit_calculation_repository.dart';
+import 'package:bank_thing/core/domain/repositories/credit_calculation/save_credit_calculation_dto.dart';
 import 'package:bank_thing/core/domain/repositories/credit_calculator.dart';
 import 'package:bank_thing/core/ui/entities/validation_error.dart';
 import 'package:flutter/material.dart';
@@ -101,10 +102,9 @@ abstract class _CreditCalculationControllerBase with Store {
       return;
     isSaving = true;
     await repository.saveCreditCalculations(
-      CreditCalculation(
+      SaveCreditCalculationDto(
         input: creditCalculationInput!,
         result: creditCalculationResult!,
-        createdTime: DateTime.now(),
       ),
     );
     isSaving = false;

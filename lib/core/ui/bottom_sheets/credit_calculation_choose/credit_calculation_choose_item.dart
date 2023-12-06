@@ -9,12 +9,16 @@ import 'package:intl/intl.dart';
 
 class CreditCalculationChooseItem extends HookWidget {
   final CreditCalculation creditCalculation;
-  final Function() onTap;
+  final Function() onBodyTap;
+  final Function() onRemoveTap;
+  final bool isBeingDeleted;
 
   const CreditCalculationChooseItem({
     super.key,
     required this.creditCalculation,
-    required this.onTap,
+    required this.onBodyTap,
+    required this.onRemoveTap,
+    this.isBeingDeleted = false,
   });
 
   @override
@@ -25,7 +29,7 @@ class CreditCalculationChooseItem extends HookWidget {
       Localizations.localeOf(context).languageCode,
     );
     return GestureDetector(
-      onTap: onTap,
+      onTap: onBodyTap,
       child: Container(
         decoration: BoxDecoration(
           color: CoreColors.creditCalculationChooseItemBackground,
@@ -41,9 +45,29 @@ class CreditCalculationChooseItem extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CreditCalculationChooseItemLine(
-              label: localization.creditSum,
-              value: creditCalculation.result.creditSum,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CreditCalculationChooseItemLine(
+                  label: localization.creditSum,
+                  value: creditCalculation.result.creditSum,
+                ),
+                if (isBeingDeleted)
+                  SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(),
+                  )
+                else
+                  GestureDetector(
+                    onTap: onRemoveTap,
+                    child: Icon(
+                      Icons.close,
+                      size: 16,
+                      color: CoreColors.creditCalculationChooseItemRemoveIcon,
+                    ),
+                  ),
+              ],
             ),
             CreditCalculationChooseItemLine(
               label: localization.monthlyPayment,
