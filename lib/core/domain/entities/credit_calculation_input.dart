@@ -4,12 +4,12 @@ class CreditCalculationInput {
   final double creditSum;
   final double monthAmount;
   final double monthCoefficient;
-  final CredicCalculationMethod credicCalculationMethod;
+  final CreditCalculationMethod creditCalculationMethod;
 
   CreditCalculationInput({
     required this.creditSum,
     required this.monthAmount,
     required this.monthCoefficient,
-    required this.credicCalculationMethod,
+    required this.creditCalculationMethod,
   });
 }

@@ -4,7 +4,7 @@ import 'package:bank_thing/core/domain/entities/credit_calculation_input.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation_result.dart';
 import 'package:bank_thing/core/domain/repositories/credit_calculator.dart';
 
-class AnnuityCreditCalculator implements CreditCalculationCalcualtor {
+class AnnuityCreditCalculator implements CreditCalculationCalculator {
   AnnuityCreditCalculator();
 
   @override
@@ -13,12 +13,12 @@ class AnnuityCreditCalculator implements CreditCalculationCalcualtor {
       monthsCoefficient: input.monthCoefficient,
       monthsAmount: input.monthAmount,
     );
-    final monthyPaymentSum = annuityCoefficient * input.creditSum;
-    final totalSum = monthyPaymentSum * input.monthAmount;
+    final monthlyPaymentSum = annuityCoefficient * input.creditSum;
+    final totalSum = monthlyPaymentSum * input.monthAmount;
     final overpaymentSum = totalSum - input.creditSum;
     return CreditCalculationResult(
       creditSum: input.creditSum,
-      monthyPaymentSum: monthyPaymentSum,
+      monthlyPaymentSum: monthlyPaymentSum,
       overpaymentSum: overpaymentSum,
       totalSum: totalSum,
     );

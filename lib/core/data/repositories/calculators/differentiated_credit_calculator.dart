@@ -2,21 +2,21 @@ import 'package:bank_thing/core/domain/entities/credit_calculation_input.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation_result.dart';
 import 'package:bank_thing/core/domain/repositories/credit_calculator.dart';
 
-class DifferentiatedCreditCalculator implements CreditCalculationCalcualtor {
+class DifferentiatedCreditCalculator implements CreditCalculationCalculator {
   DifferentiatedCreditCalculator();
 
   @override
   CreditCalculationResult calculate(CreditCalculationInput input) {
     final monthAmount = input.monthAmount;
     final monthCoefficient = input.monthCoefficient;
-    final baseMonthyPaymentSum = input.creditSum / monthAmount;
+    final baseMonthlyPaymentSum = input.creditSum / monthAmount;
     final coefficientSumIncrease = input.creditSum * monthCoefficient;
-    final monthyPaymentSum = baseMonthyPaymentSum + coefficientSumIncrease;
-    final totalSum = monthyPaymentSum * input.monthAmount;
+    final monthlyPaymentSum = baseMonthlyPaymentSum + coefficientSumIncrease;
+    final totalSum = monthlyPaymentSum * input.monthAmount;
     final overpaymentSum = totalSum - input.creditSum;
     return CreditCalculationResult(
       creditSum: input.creditSum,
-      monthyPaymentSum: monthyPaymentSum,
+      monthlyPaymentSum: monthlyPaymentSum,
       overpaymentSum: overpaymentSum,
       totalSum: totalSum,
     );

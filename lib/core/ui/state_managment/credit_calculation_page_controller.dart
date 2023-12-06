@@ -16,14 +16,14 @@ class CreditCalculationPageController = _CreditCalculationControllerBase
 
 abstract class _CreditCalculationControllerBase with Store {
   final CreditCalculationRepository repository;
-  final Map<CredicCalculationMethod, CreditCalculationCalcualtor> _calculators =
+  final Map<CreditCalculationMethod, CreditCalculationCalculator> _calculators =
       {
-    CredicCalculationMethod.annuity: AnnuityCreditCalculator(),
-    CredicCalculationMethod.differentiated: DifferentiatedCreditCalculator(),
+    CreditCalculationMethod.annuity: AnnuityCreditCalculator(),
+    CreditCalculationMethod.differentiated: DifferentiatedCreditCalculator(),
   };
 
   @observable
-  CredicCalculationMethod calculationMethod = CredicCalculationMethod.annuity;
+  CreditCalculationMethod calculationMethod = CreditCalculationMethod.annuity;
 
   @observable
   TextEditingController creditSumController;
@@ -59,7 +59,7 @@ abstract class _CreditCalculationControllerBase with Store {
       monthsPercentError == null;
 
   @computed
-  CreditCalculationCalcualtor get currentCalculator =>
+  CreditCalculationCalculator get currentCalculator =>
       _calculators[calculationMethod]!;
 
   _CreditCalculationControllerBase({
@@ -89,7 +89,7 @@ abstract class _CreditCalculationControllerBase with Store {
       creditSum: initialCreditSum,
       monthAmount: initialMonthAmount,
       monthCoefficient: initialMonthsPercent / 100,
-      credicCalculationMethod: calculationMethod,
+      creditCalculationMethod: calculationMethod,
     );
     creditCalculationResult =
         currentCalculator.calculate(creditCalculationInput!);
@@ -111,15 +111,15 @@ abstract class _CreditCalculationControllerBase with Store {
   }
 
   @action
-  Future setCreditCalculations(CreditCalculation credicCalculation) async {
-    creditCalculationInput = credicCalculation.input;
-    creditCalculationResult = credicCalculation.result;
-    calculationMethod = credicCalculation.input.credicCalculationMethod;
-    creditSumController.text = credicCalculation.input.creditSum.toString();
+  Future setCreditCalculations(CreditCalculation creditCalculation) async {
+    creditCalculationInput = creditCalculation.input;
+    creditCalculationResult = creditCalculation.result;
+    calculationMethod = creditCalculation.input.creditCalculationMethod;
+    creditSumController.text = creditCalculation.input.creditSum.toString();
     monthsAmountController.text =
-        credicCalculation.input.monthAmount.toString();
+        creditCalculation.input.monthAmount.toString();
     monthsPercentController.text =
-        (credicCalculation.input.monthCoefficient * 100).toString();
+        (creditCalculation.input.monthCoefficient * 100).toString();
   }
 
   @action
@@ -173,10 +173,10 @@ abstract class _CreditCalculationControllerBase with Store {
 
   @action
   void switchCalculationMethod() {
-    if (calculationMethod == CredicCalculationMethod.annuity) {
-      calculationMethod = CredicCalculationMethod.differentiated;
+    if (calculationMethod == CreditCalculationMethod.annuity) {
+      calculationMethod = CreditCalculationMethod.differentiated;
     } else {
-      calculationMethod = CredicCalculationMethod.annuity;
+      calculationMethod = CreditCalculationMethod.annuity;
     }
     _calculate();
   }
@@ -184,15 +184,15 @@ abstract class _CreditCalculationControllerBase with Store {
   @action
   void _calculate() {
     final creditSum = _getCreditSum();
-    final monthAmouint = _getMonthAmount();
+    final monthAmount = _getMonthAmount();
     final monthCoefficient = _getMonthCoefficient();
-    if (creditSum == null || monthAmouint == null || monthCoefficient == null)
+    if (creditSum == null || monthAmount == null || monthCoefficient == null)
       return;
     creditCalculationInput = CreditCalculationInput(
       creditSum: creditSum,
-      monthAmount: monthAmouint,
+      monthAmount: monthAmount,
       monthCoefficient: monthCoefficient,
-      credicCalculationMethod: calculationMethod,
+      creditCalculationMethod: calculationMethod,
     );
     creditCalculationResult = currentCalculator.calculate(
       creditCalculationInput!,

@@ -1,6 +1,6 @@
 import 'package:bank_thing/app_localizations.dart';
 import 'package:bank_thing/core/domain/entities/credit_calculation.dart';
-import 'package:bank_thing/core/ui/bottom_sheets/credit_calculation_choose/credic_calculation_choose_item_line.dart';
+import 'package:bank_thing/core/ui/bottom_sheets/credit_calculation_choose/credit_calculation_choose_item_line.dart';
 import 'package:bank_thing/core/ui/values/core_colors.dart';
 import 'package:bank_thing/core/ui/values/core_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +46,8 @@ class CreditCalculationChooseItem extends HookWidget {
               value: creditCalculation.result.creditSum,
             ),
             CreditCalculationChooseItemLine(
-              label: localization.monthyPayment,
-              value: creditCalculation.result.monthyPaymentSum,
+              label: localization.monthlyPayment,
+              value: creditCalculation.result.monthlyPaymentSum,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

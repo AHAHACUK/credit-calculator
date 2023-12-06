@@ -1,4 +1,4 @@
-enum CredicCalculationMethod {
+enum CreditCalculationMethod {
   annuity,
   differentiated,
 }

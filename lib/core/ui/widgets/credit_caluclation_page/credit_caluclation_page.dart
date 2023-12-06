@@ -98,10 +98,10 @@ class CreditCalculationPage extends HookWidget {
                         ),
                       ),
                       CreditCalculationResultLine(
-                        label: AppLocalizations.of(context).monthyPayment,
+                        label: AppLocalizations.of(context).monthlyPayment,
                         value: numbersFormatter.format(
                           pageController
-                              .creditCalculationResult!.monthyPaymentSum,
+                              .creditCalculationResult!.monthlyPaymentSum,
                         ),
                       ),
                       CreditCalculationResultLine(
@@ -141,13 +141,13 @@ class CreditCalculationPage extends HookWidget {
                     return Switcher(
                       width: 96,
                       enabled: pageController.calculationMethod ==
-                          CredicCalculationMethod.annuity,
+                          CreditCalculationMethod.annuity,
                       enabledColor:
-                          CoreColors.creditCalulationMethodSwitcherBackground,
+                          CoreColors.creditCalculationMethodSwitcherBackground,
                       disabledColor:
-                          CoreColors.creditCalulationMethodSwitcherBackground,
+                          CoreColors.creditCalculationMethodSwitcherBackground,
                       handleColor:
-                          CoreColors.creditCalulationMethodSwitcherHandle,
+                          CoreColors.creditCalculationMethodSwitcherHandle,
                       onSwitch: (value) =>
                           pageController.switchCalculationMethod(),
                     );

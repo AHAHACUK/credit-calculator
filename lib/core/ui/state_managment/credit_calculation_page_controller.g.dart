@@ -17,11 +17,11 @@ mixin _$CreditCalculationPageController
           Computed<bool>(() => super.canCalculateCredit,
               name: '_CreditCalculationControllerBase.canCalculateCredit'))
       .value;
-  Computed<CreditCalculationCalcualtor>? _$currentCalculatorComputed;
+  Computed<CreditCalculationCalculator>? _$currentCalculatorComputed;
 
   @override
-  CreditCalculationCalcualtor get currentCalculator =>
-      (_$currentCalculatorComputed ??= Computed<CreditCalculationCalcualtor>(
+  CreditCalculationCalculator get currentCalculator =>
+      (_$currentCalculatorComputed ??= Computed<CreditCalculationCalculator>(
               () => super.currentCalculator,
               name: '_CreditCalculationControllerBase.currentCalculator'))
           .value;
@@ -31,13 +31,13 @@ mixin _$CreditCalculationPageController
       context: context);
 
   @override
-  CredicCalculationMethod get calculationMethod {
+  CreditCalculationMethod get calculationMethod {
     _$calculationMethodAtom.reportRead();
     return super.calculationMethod;
   }
 
   @override
-  set calculationMethod(CredicCalculationMethod value) {
+  set calculationMethod(CreditCalculationMethod value) {
     _$calculationMethodAtom.reportWrite(value, super.calculationMethod, () {
       super.calculationMethod = value;
     });
@@ -214,9 +214,9 @@ mixin _$CreditCalculationPageController
       context: context);
 
   @override
-  Future<dynamic> setCreditCalculations(CreditCalculation credicCalculation) {
+  Future<dynamic> setCreditCalculations(CreditCalculation creditCalculation) {
     return _$setCreditCalculationsAsyncAction
-        .run(() => super.setCreditCalculations(credicCalculation));
+        .run(() => super.setCreditCalculations(creditCalculation));
   }
 
   late final _$_CreditCalculationControllerBaseActionController =

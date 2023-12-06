@@ -8,7 +8,7 @@
     "validationErrorEmpty": "Поле не может быть пустым",
     "credit": "Кредит",
     "overpayment": "Переплата",
-    "monthyPayment": "Ежемесячный платеж",
+    "monthlyPayment": "Ежемесячный платеж",
     "creditOverpayment": "Переплата по кредиту",
     "totalPayment": "Общая выплата",
     "annuityCreditCalculation": "Аннуитетные\nплатежи",
