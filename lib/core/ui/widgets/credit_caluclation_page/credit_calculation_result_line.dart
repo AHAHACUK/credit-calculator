@@ -19,9 +19,13 @@ class CreditCalculationResultLine extends StatelessWidget {
           "$label:",
           style: CoreTextStyles.creditCalculationResultLabel,
         ),
-        Text(
-          value,
-          style: CoreTextStyles.creditCalculationResultValue,
+        Expanded(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            overflow: TextOverflow.ellipsis,
+            style: CoreTextStyles.creditCalculationResultValue,
+          ),
         ),
       ],
     );

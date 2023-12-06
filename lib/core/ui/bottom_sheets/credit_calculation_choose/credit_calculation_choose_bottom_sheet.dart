@@ -43,20 +43,19 @@ class CreditCalculationChooseBottomSheet extends HookWidget {
             return Center(
               child: CircularProgressIndicator(),
             );
-          else if (controller.availableCalculations != null &&
-              controller.availableCalculations!.isEmpty)
+          else if (controller.availableCalculations.isEmpty)
             return Center(
               child: Text(
                 AppLocalizations.of(context).fetchEmptyError,
                 style: CoreTextStyles.fetchEmptyError,
               ),
             );
-          else if (controller.availableCalculations != null)
+          else
             return Expanded(
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  final item = controller.availableCalculations![index];
+                  final item = controller.availableCalculations[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -80,14 +79,7 @@ class CreditCalculationChooseBottomSheet extends HookWidget {
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 8,
                 ),
-                itemCount: controller.availableCalculations!.length,
-              ),
-            );
-          else
-            return Center(
-              child: Text(
-                AppLocalizations.of(context).fetchError,
-                style: CoreTextStyles.fetchError,
+                itemCount: controller.availableCalculations.length,
               ),
             );
         }),

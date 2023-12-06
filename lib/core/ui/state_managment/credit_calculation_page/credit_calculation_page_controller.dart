@@ -38,6 +38,8 @@ abstract class _CreditCalculationControllerBase with Store {
   @observable
   ValidationError? monthsAmountError;
 
+  static const _monthAmountMaximum = 1000;
+
   @observable
   TextEditingController monthsPercentController;
 
@@ -125,16 +127,16 @@ abstract class _CreditCalculationControllerBase with Store {
   @action
   void onCreditSumChange(String creditSumString) {
     if (creditSumString.isEmpty) {
-      creditSumError = ValidationError.empty;
+      creditSumError = EmptyValidationError();
       return;
     }
     final creditSum = double.tryParse(creditSumString);
     if (creditSum == null) {
-      creditSumError = ValidationError.format;
+      creditSumError = FormatValidationError();
       return;
     }
     if (creditSum == 0) {
-      creditSumError = ValidationError.zero;
+      creditSumError = ZeroValidationError();
       return;
     }
     creditSumError = null;
@@ -144,16 +146,22 @@ abstract class _CreditCalculationControllerBase with Store {
   @action
   void onMonthAmountChange(String monthsAmountString) {
     if (monthsAmountString.isEmpty) {
-      monthsAmountError = ValidationError.empty;
+      monthsAmountError = EmptyValidationError();
       return;
     }
     final monthsAmount = double.tryParse(monthsAmountString);
     if (monthsAmount == null) {
-      monthsAmountError = ValidationError.format;
+      monthsAmountError = FormatValidationError();
       return;
     }
     if (monthsAmount == 0) {
-      monthsAmountError = ValidationError.zero;
+      monthsAmountError = ZeroValidationError();
+      return;
+    }
+    if (monthsAmount > _monthAmountMaximum) {
+      monthsAmountError = TooLargeValidationError(
+        _monthAmountMaximum.toInt().toString(),
+      );
       return;
     }
     monthsAmountError = null;
@@ -163,12 +171,12 @@ abstract class _CreditCalculationControllerBase with Store {
   @action
   void onMonthsPercentChange(String monthsCoefficientString) {
     if (monthsCoefficientString.isEmpty) {
-      monthsPercentError = ValidationError.empty;
+      monthsPercentError = EmptyValidationError();
       return;
     }
     final monthsCoefficient = double.tryParse(monthsCoefficientString);
     if (monthsCoefficient == null) {
-      monthsPercentError = ValidationError.format;
+      monthsPercentError = FormatValidationError();
       return;
     }
     monthsPercentError = null;

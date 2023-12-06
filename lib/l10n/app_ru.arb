@@ -1,11 +1,19 @@
 {
     "appTitle": "Банк Штука",
     "creditSum": "Сумма кредита",
-    "creditTime": "Срок кредита",
+    "creditTimeInMonths": "Срок кредита, в месяцах",
     "creditPercentage": "Процент кредита",
     "validationErrorFormat": "Неверный формат",
     "validationErrorZero": "Значение не может быть равным нулю",
     "validationErrorEmpty": "Поле не может быть пустым",
+    "validationErrorTooLarge": "Значение не может быть больше {maximum}",
+    "@validationErrorTooLarge": {
+        "placeholders": {
+            "maximum": {
+                "type": "String"
+            }
+        }
+    },
     "credit": "Кредит",
     "overpayment": "Переплата",
     "monthlyPayment": "Ежемесячный платеж",
