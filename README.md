@@ -1,6 +1,6 @@
 # Credit Calculator
 ![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/9aa7ccb8-361e-4eb1-b657-a6e8684e2d60)
-![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/f56bef39-fd34-48c1-8952-827f6095246b)
+![image](https://github.com/AHAHACUK/credit-calculator/assets/30086100/5a195fa9-20ee-443e-b9b0-15e2b924b222)
 
 ### Архитектура
 Архитектура приложения состоит из трех слоев:
